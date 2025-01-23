@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+int prime_no(int l,int r)
+{
+    int count = 0;
+    int size = l-r;
+    vector<bool> prime(r + 1, true);
+    prime[0] = prime[1] = false; 
+
+    for(int p = 2; p*p<=r; p++)
+    {
+       if(prime[p]==true)
+       {
+             for(int i = p*2;i<=r;i=i+p)
+             {
+                prime[i]=false;
+             }
+       } 
+    }
+    for(int i = l;i<=r-6;i++)
+    {
+        if(prime[i]&&prime[i+6])
+        {
+            count++;
+        }
+    }
+
+    if(count>0)
+    {
+        cout<<count<<endl;
+    }
+    else
+    {
+        cout<<"No Prime Pairs Found"<<endl;
+
+    }
+    return 0;
+
+}
+int main()
+{
+    int n,m;
+    cout<<"Enter range:"<<endl;
+    cin>>n>>m;
+    prime_no(n,m);
+    return 0;
+}
